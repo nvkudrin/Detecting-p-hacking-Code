@@ -1,2 +1,3 @@
-# Detecting-p-hacking-Code
+# Detecting p-hacking-Code
 The tests for p-hacking implemented in R
+

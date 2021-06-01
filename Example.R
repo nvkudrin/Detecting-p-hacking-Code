@@ -1,6 +1,6 @@
 # Example
 rm(list = ls())
-dir = "~/Desktop/For github"
+dir = "specify your working directory"
 setwd(dir)
 set.seed(123)
 RNGkind(sample.kind = "default")

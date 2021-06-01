@@ -6,4 +6,5 @@ This folder contains R functions, which were used for testing in the paper "Dete
 DISCLAIMER: This software is provided "as is" without warranty of any kind, expressed or implied.
 
 The computations were done using R version 4.0.5 (2021-03-31) -- "Shake and Throw"
+
 Platform: x86_64-apple-darwin17.0 (64-bit)

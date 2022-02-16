@@ -92,7 +92,7 @@ Fisher <- function(P, p_min, p_max){
 ##### Discontinuity test #####
 #P -- vector of p-values; c -- potential discontinuity point
 Discontinuity_test <- function(P, c){
-  res = rddensity(P, c = 0.05)
+  res = rddensity(P, c = c)
   return(res$test$p_jk)
 }
 

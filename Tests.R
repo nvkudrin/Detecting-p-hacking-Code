@@ -162,6 +162,49 @@ Bound2 <- function(p_min, p_max, J){
   return(B)
 }
   
+#######Bounds for One-sided t-tests###########
+Bound0_1s <- function(pmax, J){
+  incr = pmax/J
+  X = linspace(0, pmax, J+1)
+  B = matrix(0, J, 1)
+  for (j in 1:(J)){
+    B[j] = 2*pnorm((qnorm(1 - X[j]) - qnorm(1 - X[j+1]))/2)-1
+  }
+  B[1]=1
+  return(B)
+}
+Bound1_1s <- function(pmax, J){
+  incr = pmax/J
+  h = linspace(0, 100, n=100000)
+  X = linspace(0, pmax, J+1)
+  B = matrix(0, J-1, 1)
+  for (j in 1:(J-1)){
+    Obj1 = pnorm(qnorm(1 - X[j]) - h) - pnorm(qnorm(1 - X[j+1]) - h)
+    Obj2 = pnorm(qnorm(1 - X[j+1]) - h) - pnorm(qnorm(1 - X[j+2]) - h)
+    A = Obj2-Obj1
+    B[j] = max(abs(A))
+  }
+  B[1]=1
+  return(B)
+}
+Bound2_1s <- function(pmax, J){
+  incr = pmax/J
+  h = linspace(0, 100, n=100000)
+  X = linspace(0, pmax, J+1)
+  B = matrix(0, J-2, 1)
+  for (j in 1:(J-2)){
+    Obj1 = pnorm(qnorm(1 - X[j]) - h) - pnorm(qnorm(1 - X[j+1]) - h)
+    Obj2 = pnorm(qnorm(1 - X[j+1]) - h) - pnorm(qnorm(1 - X[j+2]) - h)
+    A1 = Obj2-Obj1
+    Obj3 = pnorm(qnorm(1 - X[j+1]) - h) - pnorm(qnorm(1 - X[j+2]) - h)
+    Obj4 = pnorm(qnorm(1 - X[j+2]) - h) - pnorm(qnorm(1 - X[j+3]) - h)
+    A2 = Obj4-Obj3
+    B[j] = max(abs(A2-A1))
+  }
+  B[1]=1
+  return(B)
+}
+
 #Cox-Shi test for K-monotonicity and bounds on [p_min, p_max] interval
 #Q - vector of p-values; ind - vector of paper ids; J - number of subintervals;
 # B=1 to use bounds, B=0 to test without bounds
